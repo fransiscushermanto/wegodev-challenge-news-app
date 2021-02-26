@@ -15,6 +15,7 @@ const styles = {
     background-color: rgba(37, 37, 39, 0.03);
     border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    width: 100%;
     &::-webkit-scrollbar-track {
       -webkit-box-shadow: none !important;
       background-color: transparent;
@@ -27,6 +28,10 @@ const styles = {
     }
     &::-webkit-scrollbar-thumb {
       background-color: transparent;
+    }
+    @media (max-width: 480px) {
+      border-top-left-radius: 15px;
+      border-bottom-left-radius: 15px;
     }
   `,
 };

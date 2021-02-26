@@ -1,20 +1,17 @@
 import React from "react";
-import { css } from "@emotion/css";
-import Head from "next/head";
+import { useRouter } from "next/router";
+import { css, cx } from "@emotion/css";
+import Link from "next/link";
 import Image from "next/image";
-import CardSlider from "./cardSlider";
-
-const siteTitle = "News";
+import CardSlider from "./CardSlider";
+import { useNav } from "./providers/NavProvider";
 
 const styles = {
-  container: css({
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    height: "100%",
-
-    minHeight: "100vh",
-  }),
+  header: css`
+    position: sticky;
+    top: 0;
+    background: white;
+  `,
   nav: css({
     width: "100%",
     height: "5rem",
@@ -46,13 +43,18 @@ const styles = {
     overflowY: "hidden",
     overflowX: "auto",
     display: "inline-flex",
+    width: "100%",
   }),
   categories: css`
+    cursor: pointer;
     margin: 0 0.3125rem;
     padding: 0.5rem 0.625rem;
+    transition-duration: 0.3s;
 
     border: none;
     border-radius: 12px;
+
+    outline: none;
 
     &::nth-child(1) {
       margin-left: 0;
@@ -63,6 +65,13 @@ const styles = {
       margin-right: 0;
       margin-left: 0.3125rem;
     }
+    &:hover {
+      background-color: rgba(255, 69, 0, 0.8);
+      color: #f8f8f8;
+    }
+    &:focus {
+      background-color: #ff4500;
+    }
   `,
   active: css`
     background-color: #ff4500;
@@ -71,12 +80,10 @@ const styles = {
   `,
 };
 
-interface ILayoutProps {
-  children: React.ReactNode;
-}
-
-const categories = [
-    "All",
+export const categories = [
+  "All",
+  "Fintech",
+  "Kpop",
   "Apple",
   "PlayStation",
   "Microsoft",
@@ -84,34 +91,18 @@ const categories = [
   "Netflix",
   "Gaming",
   "Bitcoin",
+  "Cryptocurrency",
 ];
 
-const Layout = ({ children }: ILayoutProps) => {
+const Navigation = () => {
+  const [active, setActive] = useNav();
 
-    
+  function handleActiveCategory(category: string) {
+    setActive(category);
+  }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
-        <meta
-          name="description"
-          content="Learn how to build a personal website using Next.js"
-        />
-        <meta
-          property="og:image"
-          content={`https://og-image.vercel.app/${encodeURI(
-            siteTitle,
-          )}.png?theme=light&md=0&fontSize=75px&images=https%3A%2F%2Fassets.vercel.com%2Fimage%2Fupload%2Ffront%2Fassets%2Fdesign%2Fnextjs-black-logo.svg`}
-        />
-        <meta name="og:title" content={siteTitle} />
-        <meta name="twitter:card" content="summary_large_image" />
-      </Head>
+    <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.logoWrapper}>
           <div className={styles.logo}>
@@ -131,15 +122,24 @@ const Layout = ({ children }: ILayoutProps) => {
       <div className={styles.categoryCarouselWrapper}>
         <CardSlider>
           {categories.map((category, i) => (
-            <button className={styles.categories} key={i}>
+            <button
+              onClick={() => handleActiveCategory(category.toLowerCase())}
+              className={cx(
+                styles.categories,
+                !active
+                  ? category.toLowerCase() === "all" && styles.active
+                  : String(active).toLowerCase() === category.toLowerCase() &&
+                      styles.active,
+              )}
+              key={i}
+            >
               <span>{category}</span>
             </button>
           ))}
         </CardSlider>
       </div>
-      {children}
-    </div>
+    </header>
   );
 };
 
-export default Layout;
+export default Navigation;
