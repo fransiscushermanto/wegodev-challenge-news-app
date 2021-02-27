@@ -1,7 +1,7 @@
 import { GetStaticProps } from "next";
 import Head from "next/head";
 import ContentLayout from "../components/layouts/ContentLayout";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useNav } from "../components/providers/NavProvider";
 import { getHeadlineNews, getNewsByCategory } from "../lib";
 import { QueryClient, useQuery } from "react-query";
@@ -34,7 +34,7 @@ export default function Home() {
 
   const fetchNews = useCallback(async () => {
     const res =
-      active !== "all"
+      active !== "all" && active
         ? await getNewsByCategory(active)
         : await getHeadlineNews();
     return res;
@@ -47,9 +47,14 @@ export default function Home() {
     isFetching,
     isFetchedAfterMount,
     isSuccess,
-  } = useQuery(active ? ["news", active] : "news", fetchNews);
+    refetch,
+  } = useQuery(active ? ["news", active] : "news", fetchNews, {enabled: false});
 
-  console.log(isFetchedAfterMount);
+  useEffect(() => {
+    if (active) {
+      refetch();
+    }
+  }, [active])
 
   return (
     <ContentLayout>
@@ -58,17 +63,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ul>
-        {active && news && isFetching ? (
-          <Spinner size={"md"} />
-        ) : (
-          isSuccess &&
+        {isSuccess &&
           news?.map((item: INews) => (
             <li key={item.title}>
               {item.title}
               <hr></hr>
             </li>
-          ))
-        )}
+          ))}
       </ul>
     </ContentLayout>
   );
