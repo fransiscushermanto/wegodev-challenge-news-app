@@ -2,8 +2,9 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 'Roboto Condensed', sans-serif;
+
   overflow-x: hidden;
+  overflow-y: hidden;
   max-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,10 +12,11 @@ body {
 
 #__next {
   display: flex;
+  overflow-y: auto;
+  overflow-x: hidden;
   flex-direction: column;
   max-height: 100vh;
 }
-
 
 a {
   color: inherit;
@@ -24,4 +26,5 @@ a {
 * {
   box-sizing: border-box;
   transition: all ease 0.5s;
+  font-family: "Roboto Condensed", sans-serif !important;
 }

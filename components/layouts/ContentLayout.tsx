@@ -10,7 +10,8 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    height: "100%",
+    height: "auto",
+    alignItems: 'flex-start',
 
     minHeight: "100vh",
   }),
@@ -22,7 +23,7 @@ interface ILayoutProps {
 
 const Layout = ({ children }: ILayoutProps) => {
   return (
-    <div className={styles.container}>
+    <Box className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="preconnect" href="https://fonts.gstatic.com" />
@@ -43,8 +44,8 @@ const Layout = ({ children }: ILayoutProps) => {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <Box pl={30} pr={30}>{children}</Box>
-    </div>
+      <Box pt={1} pb={10} pl={5} pr={5} h={'100%'} w={'100%'}>{children}</Box>
+    </Box>
   );
 };
 

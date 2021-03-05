@@ -11,6 +11,7 @@ const styles = {
     position: sticky;
     top: 0;
     background: white;
+    padding-bottom: 10px;
   `,
   nav: css({
     width: "100%",
@@ -78,13 +79,18 @@ const styles = {
     box-shadow: 0px 8px 24px rgba(37, 37, 39, 0.2);
     color: #f8f8f8;
   `,
+  cardSlider: css`
+    padding: 0.625rem 0.625rem;
+    background-color: rgba(37, 37, 39, 0.03);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+  `,
 };
 
 export const categories = [
-  "All",
+  "Apple",
   "Fintech",
   "Kpop",
-  "Apple",
   "PlayStation",
   "Microsoft",
   "Google",
@@ -120,7 +126,7 @@ const Navigation = () => {
         </div>
       </nav>
       <div className={styles.categoryCarouselWrapper}>
-        <CardSlider>
+        <CardSlider className={styles.cardSlider}>
           {categories.map((category, i) => (
             <button
               onClick={() => handleActiveCategory(category.toLowerCase())}

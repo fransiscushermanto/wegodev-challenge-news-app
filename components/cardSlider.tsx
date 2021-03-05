@@ -1,20 +1,19 @@
 import React, { useState, useRef } from "react";
 
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 
 interface ICardSliderProps {
   children: React.ReactNode;
+  style?: React.CSSProperties;
+  className?: string;
 }
 
 const styles = {
   cardSlider: css`
-    padding: 0.625rem 0.625rem;
     display: flex;
     flex-direction: row;
     overflow-x: auto;
-    background-color: rgba(37, 37, 39, 0.03);
-    border-top-left-radius: 15px;
-    border-bottom-left-radius: 15px;
+    overflow-y: hidden;
     width: 100%;
     &::-webkit-scrollbar-track {
       -webkit-box-shadow: none !important;
@@ -36,7 +35,7 @@ const styles = {
   `,
 };
 
-const CardSlider = ({ children }: ICardSliderProps) => {
+const CardSlider = ({ children, style, className }: ICardSliderProps) => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isDown, setIsDown] = useState(false);
@@ -69,11 +68,12 @@ const CardSlider = ({ children }: ICardSliderProps) => {
 
   return (
     <div
-      className={styles.cardSlider}
+      className={cx(styles.cardSlider, className )}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
       onMouseMove={onMouseMove}
+      style={style}
       ref={slider}
     >
       {children}

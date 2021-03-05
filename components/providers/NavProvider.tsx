@@ -9,7 +9,7 @@ const NavContext = createContext<
 >(["", () => {}]);
 
 const NavProvider: React.SFC<NavProviderProps> = ({ children }) => {
-  const [active, setActive] = useState<string>();
+  const [active, setActive] = useState<string>('apple');
 
   return (
     <NavContext.Provider value={[active, setActive]}>
