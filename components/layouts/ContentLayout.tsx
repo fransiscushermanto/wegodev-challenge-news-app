@@ -1,7 +1,7 @@
 import React from "react";
-import { css } from "@emotion/css";
+import { css, cx } from "@emotion/css";
 import Head from "next/head";
-import Image from "next/image";
+import { Box } from "@chakra-ui/layout";
 
 const siteTitle = "News";
 
@@ -10,31 +10,10 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     width: "100%",
-    height: "100%",
+    height: "auto",
+    alignItems: 'flex-start',
 
     minHeight: "100vh",
-  }),
-  nav: css({
-    width: "100%",
-    height: "5rem",
-    maxHeight: "5rem",
-    padding: "0.625rem 1.25rem",
-  }),
-  logoWrapper: css({
-    display: "flex",
-    height: "100%",
-    alignItems: "center",
-  }),
-  logo: css({
-    width: "1.875rem",
-    height: "1.875rem",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }),
-  logoImg: css({
-    width: "100%",
-    height: "100%",
   }),
 };
 
@@ -44,9 +23,14 @@ interface ILayoutProps {
 
 const Layout = ({ children }: ILayoutProps) => {
   return (
-    <div className={styles.container}>
+    <Box className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+          rel="stylesheet"
+        />
         <meta
           name="description"
           content="Learn how to build a personal website using Next.js"
@@ -60,21 +44,8 @@ const Layout = ({ children }: ILayoutProps) => {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
-      <nav className={styles.nav}>
-        <div className={styles.logoWrapper}>
-          <div className={styles.logo}>
-            <Image
-              src="/img/logo.svg"
-              className={styles.logoImg}
-              width={30}
-              height={30}
-              alt="Logo"
-            />
-          </div>
-        </div>
-      </nav>
-      {children}
-    </div>
+      <Box pt={1} pb={10} pl={5} pr={5} h={'100%'} w={'100%'}>{children}</Box>
+    </Box>
   );
 };
 
