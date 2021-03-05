@@ -174,8 +174,8 @@ export default (req, res) => {
               page: page,
             }
           : { articles: [], page: page };
-      // res.status(200).json(result);
-      res.status(400).json({message: 'An Error Occured'});
+      res.status(200).json(result);
+      // res.status(400).json({message: 'An Error Occured'});
       break;
 
     default:

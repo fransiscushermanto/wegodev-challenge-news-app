@@ -35,7 +35,7 @@ const styles = {
   `,
 };
 
-const CardSlider = ({ children, style, className }: ICardSliderProps) => {
+const Slider = ({ children, style, className }: ICardSliderProps) => {
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const [isDown, setIsDown] = useState(false);
@@ -68,7 +68,7 @@ const CardSlider = ({ children, style, className }: ICardSliderProps) => {
 
   return (
     <div
-      className={cx(styles.cardSlider, className )}
+      className={cx(styles.cardSlider, className)}
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
@@ -81,4 +81,4 @@ const CardSlider = ({ children, style, className }: ICardSliderProps) => {
   );
 };
 
-export default CardSlider;
+export default Slider;
