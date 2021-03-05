@@ -3,9 +3,7 @@ import axios from "axios";
 export async function getHeadlineNews() {
   try {
     const res = await axios.get(
-      process.env.NODE_ENV === "production"
-        ? `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
-        : `http://localhost:3000/api/news`,
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`,
     );
     return res.data.articles;
   } catch (error) {
@@ -22,9 +20,7 @@ export async function getNewsByCategory({
 }) {
   try {
     const res = await axios.get(
-      process.env.NODE_ENV === "production"
-        ? `https://newsapi.org/v2/everything?q=${category}&page=${page}&language=en&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`
-        : `http://localhost:3000/api/news?page=${page}`,
+      `https://newsapi.org/v2/everything?q=${category}&page=${page}&language=en&apiKey=${process.env.NEXT_PUBLIC_NEWS_API_KEY}`,
     );
 
     return {
