@@ -9,7 +9,7 @@ import { Spinner } from "@chakra-ui/spinner";
 import { dehydrate } from "react-query/hydration";
 import { css } from "@emotion/css";
 import HeadlineNewsCard from "../components/HeadlineNewsCard";
-import CardSlider from "../components/CardSlider";
+import CardSlider from "../components/Slider";
 import { Box, Text } from "@chakra-ui/react";
 import NewsCard from "../components/NewsCard";
 import useIntersectionObserver from "../hooks/useIntersectionObserver";
@@ -113,7 +113,6 @@ export default function Home() {
     enabled: hasNextPage,
   });
 
-  console.log(news);
   return (
     <ContentLayout>
       <Head>

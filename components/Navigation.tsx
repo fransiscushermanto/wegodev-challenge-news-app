@@ -1,9 +1,7 @@
 import React from "react";
-import { useRouter } from "next/router";
 import { css, cx } from "@emotion/css";
-import Link from "next/link";
 import Image from "next/image";
-import CardSlider from "./CardSlider";
+import CardSlider from "./Slider";
 import { useNav } from "./providers/NavProvider";
 
 const styles = {
